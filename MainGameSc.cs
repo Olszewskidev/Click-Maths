@@ -34,7 +34,8 @@ public class MainGameSc : MonoBehaviour
         GenerateRandomList();
         GiveTask();
     }
-    public void GenerateRandomList()//function called at the beginning of the level to create a list of unique numbers
+    //function called at the beginning of the level to create a list of unique numbers
+    public void GenerateRandomList()
     {
         for (int i = 1; i < MathTasks.Length; i++)
         {
@@ -47,12 +48,14 @@ public class MainGameSc : MonoBehaviour
             uniqueNumbers.Remove(ranNum);
         }
     }
-    public void RandomnumberGet() //The function retrieves one unique number from the list for randomness maths tasks
+    //The function retrieves one unique number from the list for randomness maths tasks
+    public void RandomnumberGet() 
     {
         RandomNumber = finishedList[n];
         n++;
     }
-    public void GiveTask() // function created to ask  maths questions
+    // function created to ask  maths questions
+    public void GiveTask() 
     {
         RandomnumberGet();
         Task = MathTasks[RandomNumber];
@@ -63,7 +66,8 @@ public class MainGameSc : MonoBehaviour
         ShortValue = Task.GetComponent<TaskScript>().HowShort;
         Task.GetComponent<Animator>().Play("start", -1, 0.0f);
     }
-    public void NextImp()//The function that is triggered by the player when the question is too difficult for him and player can do this only 3 times in level
+    //The function that is triggered by the player when the question is too difficult for him and player can do this only 3 times in level
+    public void NextImp()
     {
         NextTasknumber++;
         if ((NextTasknumber >= 1) && (NextTasknumber <= 3))
@@ -75,7 +79,8 @@ public class MainGameSc : MonoBehaviour
             StartCoroutine("Waiting");
         }
     }
-    public void Checkingaswer() // function created to verify the correctness of the result
+    // function created to verify the correctness of the result
+    public void Checkingaswer() 
     {
         if (Score.text == CorrectScore) // score is string (not int) becouse game have 2 buttons, first is to X. (first digit) and second is to .X (second digit) and finally string + string gives correct answer than int+int 
         {
@@ -91,13 +96,15 @@ public class MainGameSc : MonoBehaviour
             IncorrectAnswer();
         }
     }
-    IEnumerator Waiting() // function created to play the whole animation
+    // function created to play the whole animation
+    IEnumerator Waiting() 
     {
         yield return new WaitForSeconds(1f);
         DestroyObject(Task);
         GiveTask();
     }
-    private void Cleaning() //A function created to clear the given result by the player after checking the his answer
+    //A function created to clear the given result by the player after checking the his answer
+    private void Cleaning() 
     {
         SCmenager.GetComponent<MainButtonScript>().ButLeftClick = 0;
         SCmenager.GetComponent<MainButtonScript>().ButRightClick = 0;
@@ -111,7 +118,8 @@ public class MainGameSc : MonoBehaviour
         Task.GetComponent<Animator>().Play("zle", -1, 0.0f);
         Cleaning();
     }
-    public void PointsAdd()// function responsible for the player's result in the game
+    // function responsible for the player's result in the game
+    public void PointsAdd()
     {
         MainPoints = MainPoints + Task.GetComponent<TaskScript>().Pkt;
     }
